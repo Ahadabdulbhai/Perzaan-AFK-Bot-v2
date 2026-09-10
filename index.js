@@ -597,7 +597,7 @@ function periodicRejoin(bot) {
 // MOVEMENT HELPERS
 // ============================================================
 function startCircleWalk(bot, defaultMove) {
-  const radius = config.movement['circle-walk'].radius;
+ const radius = config.movement['circle-walk'].radius;
   let angle = 0;
   let lastPathTime = 0;
 
@@ -697,25 +697,6 @@ function combatModule(bot, mcData) {
       }
     } catch (e) {
       console.log('[Combat] Error:', e.message);
-    }
-  }, 1500);
-
-  bot.on('health', () => {
-    if (!config.combat['auto-eat']) return;
-    try {
-      if (bot.food < 14) {
-        const food = bot.inventory.items().find(i => {
-          const itemData = mcData.itemsByName[i.name];
-          return itemData && itemData.food;
-        });
-        if (food) {
-          bot.equip(food, 'hand')
-            .then(() => bot.consume())
-            .catch(e => console.log('[AutoEat] Error:', e.message));
-        }
-      }
-    } catch (e) {
-console.log('[Combat] Error:', e.message);
     }
   }, 1500);
 
@@ -916,4 +897,4 @@ console.log(`Version: ${config.server.version}`);
 console.log(`Auto-Reconnect: ${config.utils['auto-reconnect'] ? 'Enabled' : 'Disabled'}`);
 console.log('='.repeat(50));
 
-createBot();
+createBot(); 
